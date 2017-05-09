@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import RssHandler from '../rss/rssHandler';
 import _ from 'lodash';
+import slug from 'slug';
 
 const Schema = mongoose.Schema;
 const ArticleSchema = new Schema({
@@ -9,6 +10,7 @@ const ArticleSchema = new Schema({
   description: String,
   summary: String,
   date: Date,
+  slug: String,
   _blog: { type: String, ref: 'blog' }
 });
 
@@ -18,6 +20,18 @@ ArticleSchema.options.toJSON.transform = (doc, ret) => {
 };
 
 const Article = mongoose.model('article', ArticleSchema);
+
+export async function updateSlug() {
+  const articles = await Article.find();
+  articles.forEach(article => {
+    article.slug = slug(article.title, { lower: true });
+    article.save();
+  });
+}
+
+export async function getAllArticles(limit = 0) {
+  return await Article.find().populate('_blog').sort({ date: -1 }).limit(limit);
+}
 
 export async function getArticles(page) {
   const perPage = 50;
@@ -38,6 +52,10 @@ export async function getArticles(page) {
 
 export async function getArticlesByBlogId(blogId) {
   return await Article.find({ _blog: blogId }).sort({ date: -1 }).limit(5);
+}
+
+export async function getBySlug(slug) {
+  return await Article.findOne({ slug }).populate('_blog');
 }
 
 export async function removeByBlogId(blogId) {
@@ -62,6 +80,7 @@ export async function getArticlesForBlog(blog) {
         href: item.article.link,
         description,
         date: pubDate,
+        slug: slug(item.article.title, { lower: true }),
         _blog: blog._id
       });
 
