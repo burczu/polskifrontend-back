@@ -3,6 +3,7 @@ import { Blogs, Articles, Newses } from '../models';
 import RssHandler from '../rss/rssHandler';
 import * as faviconHelper from '../utils/faviconHelper';
 import slugify from '../utils/slugify';
+import imageUpload from '../helpers/imageUploader';
 
 const router = new express.Router();
 
@@ -61,6 +62,12 @@ router.post('/blogs/:blogId/refresh', async (req, res) => {
 router.post('/blogs', async (req, res) => {
   const rssInstance = new RssHandler(req.body.rss);
   const faviconUrl = await faviconHelper.getFaviconUrl(req.body.href);
+  let faviconUploadResult = { secure_url: '' };
+  try {
+    faviconUploadResult = await imageUpload(faviconUrl);
+  } catch (error) {
+    faviconUploadResult.secure_url = '';
+  }
 
   let rssValid = false;
   try {
@@ -79,7 +86,7 @@ router.post('/blogs', async (req, res) => {
     }
 
     try {
-      const blog = await Blogs.add({ ...req.body, slug, favicon: faviconUrl });
+      const blog = await Blogs.add({ ...req.body, slug, favicon: faviconUploadResult.secure_url });
 
       // load rss and fill articles for this blog
       await Articles.getArticlesForBlog(blog);
@@ -89,6 +96,16 @@ router.post('/blogs', async (req, res) => {
       console.log(error);
       return res.send({ success: false, reason: 'cant-add', message: 'New blog entity adding failed' });
     }
+  }
+});
+
+router.post('/blogs/refresh', async (req, res) => {
+  try {
+    await Blogs.updateFavicon();
+
+    res.send({ success: true });
+  } catch (error) {
+    res.send({ success: false, message: error });
   }
 });
 
