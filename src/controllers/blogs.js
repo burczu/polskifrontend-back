@@ -2,7 +2,7 @@ import express from 'express';
 import graphqlHttp from 'express-graphql';
 import sendMail from '../utils/emailer';
 import { Blogs } from '../models';
-import { BlogSchema } from '../graphql/blogs/blogSchema';
+import { BlogSchema } from '../graphql/blogSchema';
 
 const router = new express.Router();
 

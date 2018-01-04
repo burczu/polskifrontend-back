@@ -1,4 +1,4 @@
-import { Blogs } from '../../../models';
+import { Blogs } from '../../models';
 
 export const blogResolvers = {
   getAll: async (root, { page }) => {

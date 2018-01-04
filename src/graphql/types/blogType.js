@@ -1,8 +1,10 @@
 import {
   GraphQLObjectType,
-  GraphQLString
+  GraphQLString,
+  GraphQLList
 } from 'graphql';
 import GraphQLDate from 'graphql-date';
+import { ArticleType } from './articleType';
 
 export const BlogType = new GraphQLObjectType({
   name: 'Blog',
@@ -14,6 +16,7 @@ export const BlogType = new GraphQLObjectType({
     rss: { type: GraphQLString },
     favicon: { type: GraphQLString },
     slug: { type: GraphQLString },
-    publishedDate: { type: GraphQLDate }
+    publishedDate: { type: GraphQLDate },
+    articles: { type: GraphQLList(ArticleType) }
   })
 });
