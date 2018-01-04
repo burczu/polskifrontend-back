@@ -1,8 +1,15 @@
 import express from 'express';
+import graphqlHttp from 'express-graphql';
 import sendMail from '../utils/emailer';
 import { Blogs } from '../models';
+import { BlogSchema } from '../graphql/blog';
 
 const router = new express.Router();
+
+router.use('/graphql', graphqlHttp({
+  schema: BlogSchema,
+  graphiql: process.env.NODE_ENV === 'develop'
+}));
 
 router.get('/all/:page', async (req, res) => {
   try {
