@@ -1,16 +1,14 @@
 import express from 'express';
+import graphqlHttp from 'express-graphql';
 import { Articles } from '../models';
+import { ArticleSchema } from '../graphql/articleSchema';
 
 const router = new express.Router();
 
-router.get('/all/:page', async (req, res) => {
-  try {
-    const { articles, nextPage } = await Articles.getArticles(req.params.page - 1);
-    res.send({ success: true, articles, nextPage });
-  } catch (error) {
-    res.send({ success: false, message: error });
-  }
-});
+router.use('/graphql', graphqlHttp({
+  schema: ArticleSchema,
+  graphiql: process.env.NODE_ENV === 'develop'
+}));
 
 router.get('/:slug', async (req, res) => {
   try {
