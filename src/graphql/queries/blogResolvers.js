@@ -7,18 +7,14 @@ export const blogResolvers = {
     return blogs;
   },
   submit: async (root, { blogName, email }) => {
-    try {
-      const body = `
+    const body = `
         <p style="font-size: 1.4em;">
           Adres bloga: ${blogName},<br /> 
           Email: ${email || 'nie podano'}
         </p>
       `;
-      const sendingResult = await sendMail(body, email);
+    const sendingResult = await sendMail(body, email);
 
-      return sendingResult.success;
-    } catch (error) {
-      return false;
-    }
+    return sendingResult.success;
   }
 };
