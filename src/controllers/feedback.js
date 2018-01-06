@@ -1,21 +1,12 @@
 import express from 'express';
-import sendMail from '../utils/emailer';
+import graphqlHttp from 'express-graphql';
+import { FeedbackSchema } from '../graphql/feedbackSchema';
 
 const router = new express.Router();
 
-router.post('/', async (req, res) => {
-  try {
-    const subject = 'Zgłoszono uwagi do serwisu Polski Front-End';
-    const body = `<p style="font-size: 1.4em;">
-      Email: ${req.body.email}<br /> 
-      Treść: <br />
-      <i>${req.body.feedback}</i>
-      </p>`;
-    const sendingResult = await sendMail(body, subject);
-    res.send(sendingResult);
-  } catch (error) {
-    res.send({ success: false, message: error });
-  }
-});
+router.use('/graphql', graphqlHttp({
+  schema: FeedbackSchema,
+  graphiql: process.env.NODE_ENV === 'develop'
+}));
 
 export default router;

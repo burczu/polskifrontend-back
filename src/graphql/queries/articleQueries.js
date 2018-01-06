@@ -12,6 +12,10 @@ export const ArticleQueries = new GraphQLObjectType({
   name: 'ArticleQueries',
   description: 'Article queries.',
   fields: () => ({
+    info: {
+      type: GraphQLString,
+      resolve: () => 'This endpoint is for getting and setting data about articles.'
+    },
     articles: {
       type: ArticleResultType,
       description: 'List of all articles (with pagination)',
