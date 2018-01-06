@@ -9,7 +9,7 @@ import { newsResolvers } from './newsResolvers';
 
 export const NewsQueries = new GraphQLObjectType({
   name: 'NewsQueries',
-  description: 'Feedback queries.',
+  description: 'News queries.',
   fields: () => ({
     info: {
       type: GraphQLString,
