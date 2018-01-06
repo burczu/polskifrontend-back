@@ -1,7 +1,6 @@
 import {
   GraphQLObjectType,
-  GraphQLString,
-  GraphQLList
+  GraphQLString
 } from 'graphql';
 import GraphQLDate from 'graphql-date';
 import { BlogType } from './blogType';

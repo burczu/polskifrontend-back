@@ -1,6 +1,7 @@
 import {
   GraphQLObjectType,
-  GraphQLInt
+  GraphQLInt,
+  GraphQLNonNull
 } from 'graphql';
 import { ArticleResultType } from '../types/articleResultType';
 import { articleResolvers } from './articleResolvers';
@@ -12,7 +13,7 @@ export const ArticleQueries = new GraphQLObjectType({
     articles: {
       type: ArticleResultType,
       description: 'List of all articles (with pagination)',
-      args: { page: { type: GraphQLInt } },
+      args: { page: { type: GraphQLNonNull(GraphQLInt) } },
       resolve: articleResolvers.getAll
     }
   })

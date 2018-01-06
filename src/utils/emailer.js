@@ -10,12 +10,13 @@ const transporter = nodemailer.createTransport({
   secure: false
 });
 
-export default function sendEmail(body, subject = 'Nowa prośba o dodanie bloga!!') {
+export default function sendEmail(body, replyTo = null, subject = 'Nowa prośba o dodanie bloga!!') {
   const options = {
     from: 'request@frontendinsights.com',
     to: 'kontakt@nafrontendzie.pl',
     subject,
-    html: body
+    html: body,
+    replyTo: replyTo || 'request@frontendinsights.com'
   };
 
   return new Promise((resolve, reject) => {
