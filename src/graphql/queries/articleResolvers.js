@@ -6,7 +6,7 @@ export const articleResolvers = {
     return articles;
   },
   getBySlug: async (root, { slug }) => {
-      const article = await Articles.getBySlug(slug);
-      return article;
+    const article = await Articles.getBySlug(slug);
+    return article;
   }
 };

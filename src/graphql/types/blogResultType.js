@@ -6,7 +6,7 @@ import {
 import { BlogType } from './blogType';
 
 export const BlogsResultType = new GraphQLObjectType({
-  name: 'BlogListResult',
+  name: 'BlogsResultType',
   description: 'Result of getting all blogs, contains blogs + next page info.',
   fields: () => ({
     blogs: { type: GraphQLList(BlogType) },
