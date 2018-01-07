@@ -2,7 +2,7 @@ import {
   GraphQLNonNull,
   GraphQLInt
 } from 'graphql';
-import { NewsResultType } from '../../types/newsResultType';
+import { NewsResultType } from '../../../types/newsResultType';
 import { newsResolvers } from './newsResolvers';
 
 export default {

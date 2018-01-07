@@ -1,4 +1,4 @@
-import { Articles } from '../../../models';
+import { Articles } from '../../../../models';
 
 export const articleResolvers = {
   getAll: async (root, { page }) => {

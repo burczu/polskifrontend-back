@@ -2,7 +2,7 @@ import {
   GraphQLString,
   GraphQLNonNull
 } from 'graphql';
-import { UserAuthResultType } from '../../types/userTokenType';
+import { UserAuthResultType } from '../../../types/userTokenType';
 import { userResolvers } from './userResolvers';
 
 export default {

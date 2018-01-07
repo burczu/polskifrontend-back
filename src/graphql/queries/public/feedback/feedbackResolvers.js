@@ -1,4 +1,4 @@
-import sendMail from '../../../utils/emailer';
+import sendMail from '../../../../utils/emailer';
 
 export const feedbackResolvers = {
   submit: async (root, { email, feedback }) => {

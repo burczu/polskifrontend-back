@@ -3,9 +3,9 @@ import {
   GraphQLNonNull,
   GraphQLString
 } from 'graphql';
-import { ArticleResultType } from '../../types/articleResultType';
+import { ArticleResultType } from '../../../types/articleResultType';
+import { ArticleType } from '../../../types/articleType';
 import { articleResolvers } from './articleResolvers';
-import { ArticleType } from '../../types/articleType';
 
 export default {
   articles: {

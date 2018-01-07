@@ -3,7 +3,7 @@ import {
   GraphQLNonNull
 } from 'graphql';
 import { blogResolvers } from './blogResolvers';
-import { BlogsResultType } from '../../types/blogResultType';
+import { BlogsResultType } from '../../../types/blogResultType';
 
 export default {
   blogs: {
