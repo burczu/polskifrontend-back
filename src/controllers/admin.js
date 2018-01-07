@@ -5,6 +5,8 @@ import * as faviconHelper from '../utils/faviconHelper';
 import slugify from '../utils/slugify';
 import imageUpload from '../helpers/imageUploader';
 
+// TODO: this controller will be removed when the restricted area will be done
+
 const router = new express.Router();
 
 router.post('/articles/refresh', async (req, res) => {
