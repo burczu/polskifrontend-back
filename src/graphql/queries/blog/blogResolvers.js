@@ -1,5 +1,5 @@
-import { Blogs } from '../../models';
-import sendMail from '../../utils/emailer';
+import { Blogs } from '../../../models';
+import sendMail from '../../../utils/emailer';
 
 export const blogResolvers = {
   getAll: async (root, { page }) => {

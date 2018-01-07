@@ -1,4 +1,4 @@
-import { Newses } from '../../models';
+import { Newses } from '../../../models';
 
 export const newsResolvers = {
   getAll: async (root, { page }) => {

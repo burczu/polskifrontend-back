@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
-import { Users } from '../../models';
-import app from '../../main';
+import { Users } from '../../../models';
+import app from '../../../main';
 
 export const userResolvers = {
   authenticate: async (root, { user, password }) => {

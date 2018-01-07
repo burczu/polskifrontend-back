@@ -3,12 +3,7 @@ import express from 'express';
 import basicAuth from '../middlewares/basicAuth';
 import adminAuth from '../middlewares/adminAuth';
 
-import blogs from './blogs';
-import articles from './articles';
-import users from './users';
-import feedback from './feedback';
-import news from './news';
-import misc from './misc';
+import publicRoutes from './public';
 import admin from './admin';
 
 const router = new express.Router();
@@ -17,12 +12,7 @@ const router = new express.Router();
 router.use(basicAuth);
 
 // public routes
-router.use('/blogs', blogs);
-router.use('/articles', articles);
-router.use('/users', users);
-router.use('/feedback', feedback);
-router.use('/news', news);
-router.use('/misc', misc);
+router.use('/public', publicRoutes);
 
 // check logged in user
 router.use(adminAuth);
